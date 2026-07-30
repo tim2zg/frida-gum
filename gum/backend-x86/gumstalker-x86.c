@@ -9,6 +9,10 @@
 
 #include "gumstalker.h"
 
+#ifdef _MSC_VER
+# include <intrin.h>
+#endif
+
 #include "gummetalhash.h"
 #include "gumx86reader.h"
 #include "gumx86writer.h"
@@ -1260,7 +1264,7 @@ rescan:
 #ifdef _MSC_VER
 
 #define RETURN_ADDRESS_POINTER_FROM_FIRST_ARGUMENT(arg)   \
-    ((gpointer *) ((volatile guint8 *) &arg - sizeof (gpointer)))
+    ((gpointer *) _AddressOfReturnAddress ())
 
 GUM_NOINLINE void
 gum_stalker_follow_me (GumStalker * self,

@@ -19,7 +19,11 @@ call GUM_CSYM (_gum_stalker_do_follow_me)
 addl $28, %esp
 ret
 #else
+# if defined (HAVE_WINDOWS)
+mov %rsp, %r9
+# else
 mov %rsp, %rcx
+# endif
 jmp GUM_CSYM (_gum_stalker_do_follow_me)
 #endif
 
@@ -34,7 +38,11 @@ call GUM_CSYM (_gum_stalker_do_activate)
 addl $12, %esp
 ret
 #else
+# if defined (HAVE_WINDOWS)
+mov %rsp, %r8
+# else
 mov %rsp, %rdx
+# endif
 jmp GUM_CSYM (_gum_stalker_do_activate)
 #endif
 
@@ -49,6 +57,10 @@ call GUM_CSYM (_gum_stalker_do_deactivate)
 addl $12, %esp
 ret
 #else
+# if defined (HAVE_WINDOWS)
+mov %rsp, %rdx
+# else
 mov %rsp, %rsi
+# endif
 jmp GUM_CSYM (_gum_stalker_do_deactivate)
 #endif
